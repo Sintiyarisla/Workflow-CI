@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
 mlflow.set_experiment("Telco Churn Prediction Basic")
 
 DATA_PATH = 'dataset_preprocessing/data_clean.csv'

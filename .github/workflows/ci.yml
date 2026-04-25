@@ -12,20 +12,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          auto-update-conda: true
-          python-version: 3.10
-          activate-environment: mlflow-env
-          environment-file: MLProject/conda.yaml
+          python-version: '3.10'
 
-      - name: Install MLflow
-        shell: bash -l {0}
+      - name: Install dependencies
         run: |
-          pip install mlflow
+          pip install pandas numpy scikit-learn mlflow
 
-      - name: Run MLflow Project
-        shell: bash -l {0}
+      - name: Run MLflow Project (no conda)
         run: |
-          mlflow run MLProject
+          mlflow run MLProject --env-manager=local
