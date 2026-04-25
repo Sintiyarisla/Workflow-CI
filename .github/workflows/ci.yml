@@ -9,18 +9,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Ambil repo
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      # Setup Python
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
+      # Install dependency
       - name: Install dependencies
         run: |
           pip install pandas numpy scikit-learn mlflow
 
-      - name: Run MLflow Project (no conda)
+      # Run MLflow Project
+      - name: Run MLflow Project
         run: |
           mlflow run MLProject --env-manager=local
+
+      # Upload artifact
+      - name: Upload MLflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlflow-artifacts
+          path: mlruns
